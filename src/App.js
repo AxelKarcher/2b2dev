@@ -20,7 +20,7 @@ function App () {
         color: 'white',
         fontSize: 'h3.fontSize'
       }}>
-        Bonsoir Audience
+        Bonsoir
       </Box>
       <Container component={'iframe'}
         width={'1280'} height={'720'}
