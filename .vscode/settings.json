@@ -1,0 +1,22 @@
+{
+  /* 2b2dev Header */
+  "fileHeaderComment.parameter":{
+    "*":{
+      "commentbegin": "/*",
+      "commentprefix": "**",
+      "commentend": "*/",
+      "company": "2b2dev",
+      "author": "Alexandre Chetrit <alexandre.chetrit@epitech.eu>"
+    }
+  },
+  "fileHeaderComment.template":{
+    "*":[
+      "${commentbegin}",
+      "${commentprefix} Copyright ${company} - All Rights Reserved",
+      "${commentprefix} Unauthorized copying of this file, via any medium is strictly prohibited",
+      "${commentprefix} Proprietary and confidential",
+      "${commentprefix} Writed by ${author}",
+      "${commentend}"
+    ]
+  },
+}
