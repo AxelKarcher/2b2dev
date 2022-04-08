@@ -47,6 +47,7 @@ module.exports = {
   rules: {
     'no-unused-vars': ['warn', { vars: 'all', args: 'none', ignoreRestSiblings: false }],
     'react/jsx-uses-react': 'off',
+    'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-curly-brace-presence': ['error', { props: 'always', children: 'never' }],
     'header/header': ['error', 'block', header, 2],
