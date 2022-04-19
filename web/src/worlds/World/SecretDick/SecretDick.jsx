@@ -10,14 +10,14 @@ import PropTypes from 'prop-types'
 import { Box } from '@mui/system'
 import { useNavigate } from 'react-router-dom'
 
-import bite from '../../../assets/penis.png'
+import bite from '../../../assets/old_penis.png'
 
 function SecretDick ({ coordinates }) {
   const navigate = useNavigate()
 
   return (
     <Box sx={{ position: 'absolute', right: `${coordinates[0]}px`, top: `${coordinates[1]}px` }}>
-      <Box onClick={() => navigate('/RinkuBoard')} component={'img'} src={bite} sx={{ width: '10px' }}/>
+      <Box onClick={() => navigate('/Navy')} component={'img'} src={bite} sx={{ width: '20px' }}/>
     </Box>
   )
 }

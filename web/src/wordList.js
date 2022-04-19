@@ -5,7 +5,7 @@
 ** Written by Alexandre Chetrit <alexandre.chetrit@epitech.eu>
 */
 
-import RinkuBoard from './worlds/RinkuBoard/RinkuBoard'
+import Navy from './worlds/RinkuBoard/Navy'
 import World from './worlds/World/World'
 
 const wordList = [
@@ -14,8 +14,8 @@ const wordList = [
     component: <World />
   },
   {
-    path: '/RinkuBoard',
-    component: <RinkuBoard />
+    path: '/Navy',
+    component: <Navy />
   }
 ]
 
