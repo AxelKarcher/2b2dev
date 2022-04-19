@@ -5,7 +5,7 @@
 ** Written by Alexandre Chetrit <alexandre.chetrit@epitech.eu>
 */
 
-import Navy from './worlds/RinkuBoard/Navy'
+import Navy from './worlds/Navy/Navy'
 import World from './worlds/World/World'
 
 const wordList = [
