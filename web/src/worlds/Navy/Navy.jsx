@@ -5,24 +5,45 @@
 ** Written by Alexandre Chetrit <alexandre.chetrit@epitech.eu>
 */
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+
+import TextField from '@mui/material/TextField'
+
 import './Navy.scss'
+import config from '../../config.json'
+
+const boardBase = Array(49).fill(false)
 
 function Navy () {
-  const socket = new WebSocket('ws://86.252.64.16:8080')
-  const boardBase = Array(49).fill(false)
+  const ws = useRef(null)
 
   const [myBoard, setMyBoard] = useState([...boardBase])
   const [enemyBoard, setEnemyBoard] = useState([...boardBase])
-  const [messages, setMessages] = useState(Array(20))
+  const [fieldContent, setFieldContent] = useState('')
+  const [messages, setMessages] = useState([])
+  const [isOnce, setIsOnce] = useState(false)
 
-  socket.addEventListener('open', (event) => {
-    socket.send('Coucou le serveur !')
-  })
+  useEffect(() => {
+    ws.current = new WebSocket('ws://localhost:8080') // 86.252.64.16:8080
 
-  socket.addEventListener('message', (event) => {
-    console.log('Voici un message du serveur r', event.data)
-  })
+    return () => { ws.current.close() }
+  }, [])
+
+  useEffect(() => {
+    if (!ws.current) { return }
+
+    ws.current.onmessage = (data) => {
+      if (isOnce) {
+        const newMessages = [...messages]
+
+        newMessages.push(JSON.parse(data.data))
+        setMessages(newMessages)
+      } else {
+        setMessages(JSON.parse(data.data))
+        setIsOnce(true)
+      }
+    }
+  }, [isOnce, messages])
 
   const handleClick = (which, index) => {
     const newBoard = which === 'my' ? [...myBoard] : [...enemyBoard]
@@ -30,6 +51,11 @@ function Navy () {
     newBoard[index] = !newBoard[index]
     which === 'my' && (setMyBoard(newBoard))
     which === 'enemy' && (setEnemyBoard(newBoard))
+  }
+
+  const sendMessage = () => {
+    ws.current.send(JSON.stringify(fieldContent))
+    setFieldContent('')
   }
 
   return (
@@ -57,6 +83,28 @@ function Navy () {
             />
           ))
         }
+      </div>
+      <div id={'chat'}>
+        {
+          messages.map((elem, i) => (
+            <div key={ i } className={'message'}>
+              {elem}
+            </div>
+          ))
+        }
+        <TextField
+          autoComplete={'off'}
+          variant={'standard'}
+          value={fieldContent}
+          onChange={(e) => setFieldContent(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+          sx={{
+            input: { color: config.chatColor },
+            '& .MuiInput-underline:after': {
+              borderBottomColor: config.chatColor
+            }
+          }}
+        />
       </div>
     </div>
   )
