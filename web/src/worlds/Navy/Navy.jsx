@@ -24,7 +24,7 @@ function Navy () {
   const [isOnce, setIsOnce] = useState(false)
 
   useEffect(() => {
-    ws.current = new WebSocket('ws://localhost:8080') // 86.252.64.16:8080
+    ws.current = new WebSocket('ws://152.228.172.7:8080') // 86.252.64.16 // 152.228.172.7
 
     return () => { ws.current.close() }
   }, [])
